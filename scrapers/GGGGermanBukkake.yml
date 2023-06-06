@@ -31,7 +31,7 @@ sceneByQueryFragment:
 xPathScrapers:
   sceneSearch:
     scene:
-      Title: //div[contains(@id, "post-")]//div[@class="thumbtitle"]
+      Title: //div[contains(@id, "post-")]//div[@class="thumbtitle" and]
       URL: //div[@class="thumb-holder"]/a/@href
       Image:
         selector: //div[@class="thumb-holder"]//img/@src
@@ -122,4 +122,4 @@ xPathScrapers:
               - regex: ^
                 with: "https://www.ggg-german-bukkake.com"
       URL: //meta[@property='og:url']/@content
-# Last Updated May 16, 2023
+# Last Updated June 06, 2023
