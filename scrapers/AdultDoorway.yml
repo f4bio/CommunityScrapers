@@ -1,0 +1,47 @@
+---
+name: AdultDoorway
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - adultdoorway.com
+    scraper: sceneScraper
+sceneByName:
+  action: scrapeXPath
+  queryURL: https://tour5m.adultdoorway.com/tour/search.php?query={}
+  scraper: sceneSearch
+sceneByQueryFragment:
+  action: scrapeXPath
+  queryURL: "{url}"
+  scraper: sceneScraper
+
+xPathScrapers:
+  sceneSearch:
+    scene:
+      Title: //div[@class="item-title"]/a/text()
+      URL: //div[@class="item-title"]/a/@href
+      Image: //img[@class="stdimage update_thumb thumbs"]/@src
+      Details: //div[@class="item-date"]/text()
+  sceneScraper:
+    scene:
+      Title: //div[@class="update-info-block"]/h1/text()
+      Details: //div[@class="update-info-block"]/div[@class="update-info-block"]/text()
+      # TODO: all below
+      Date:
+        selector: //div[@class="pull-left"]/text()
+        postProcess:
+          - parseDate: Jan 1, 1970
+      Image:
+        selector: //img[contains(@src, "/moviecover/")]/@src
+        postProcess:
+          - replace:
+              - regex: ^
+                with: "https://www.adultdoorway.com"
+      Studio:
+        Name:
+          fixed: German Goo Girls
+      Movies:
+        Name: //h1/text()
+        URL: //link[@rel="canonical"]/@href
+      Tags:
+        Name: //a[@rel="tag"]/text()
+# Last Updated May 16, 2023
